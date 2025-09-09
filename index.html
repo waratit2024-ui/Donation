@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <title>ระบบรับบริจาคเงิน วัดไชยามาตย์</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #3F51B5;
+      --secondary-color: #5C6BC0;
+      --success-color: #4CAF50;
+      --error-color: #F44336;
+      --background-color: #F8F8F4;
+      --text-color: #333;
+      --border-color: #E0E0E0;
+    }
+
+    body {
+      font-family: 'Sarabun', sans-serif;
+      background-color: var(--background-color);
+      padding: 20px;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+    .header {
+      width: 100%;
+      text-align: right;
+      padding-bottom: 20px;
+      padding-right: 20px;
+      box-sizing: border-box;
+    }
+    .staff-button {
+      background-color: var(--primary-color);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+      font-size: 14px;
+    }
+    .staff-button:hover {
+      background-color: var(--secondary-color);
+    }
+
+    .container {
+      max-width: 650px;
+      width: 90%;
+      background: #FFFFFF;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--border-color);
+      box-sizing: border-box;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--primary-color);
+      font-weight: 700;
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+    
+    h3 {
+      text-align: center;
+      color: #616161;
+      font-weight: 400;
+      margin-top: -10px;
+      margin-bottom: 25px;
+      font-size: 18px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--text-color);
+      font-size: 16px;
+    }
+
+    input[type="text"], input[type="number"], select, textarea, input[type="file"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #BDBDBD;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 16px;
+      color: var(--text-color);
+      background-color: #FAFAFA;
+      transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+    input[type="text"]:focus, input[type="number"]:focus, select:focus, textarea:focus, input[type="file"]:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.2);
+      outline: none;
+    }
+    option[disabled] {
+      color: #9E9E9E;
+      background-color: #E0E0E0;
+    }
+    button {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background-color: var(--success-color);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+    button:hover {
+      background-color: #43A047;
+      box-shadow: 0 4px 10px rgba(0, 128, 0, 0.2);
+    }
+    #status {
+      margin-top: 25px;
+      text-align: center;
+      font-weight: 500;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .status-success {
+      background-color: #E8F5E9;
+      color: var(--text-color);
+    }
+    .status-error {
+      background-color: #FFEBEE;
+      color: var(--error-color);
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <a href="?page=auth" class="staff-button">สำหรับเจ้าหน้าที่</a>
+</div>
+
+<div class="container">
+  <h2>ระบบรับบริจาคเงิน</h2>
+  <h3>วัดไชยามาตย์ อ.พบพระ จ.ตาก</h3>
+  <form id="donationForm">
+    <div class="form-group">
+      <label for="donation_purpose">บริจาคเพื่อการ</label>
+      <select id="donation_purpose" name="donation_purpose">
+        <option value="กฐินสามัคคี 2568" selected>กฐินสามัคคี 2568</option>
+        <option value="งานนมัสการพระธาตุฯ 2569" disabled>งานนมัสการพระธาตุฯ 2569</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="name">ชื่อ-สกุล</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    <div class="form-group">
+      <label for="amount">จำนวนเงิน (บาท)</label>
+      <input type="number" id="amount" name="amount" min="1" required>
+    </div>
+    <div class="form-group">
+      <label for="channel">ช่องทางการบริจาค</label>
+      <select id="channel" name="channel">
+        <option value="โอนผ่านคิวอาร์โค้ด" selected>โอนผ่านคิวอาร์โค้ด</option>
+        <option value="เงินสด" disabled>เงินสด</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="note">หมายเหตุ</label>
+      <textarea id="note" name="note" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="receipt_option">การรับใบอนุโมทนาบัตร</label>
+      <select id="receipt_option" name="receipt_option">
+        <option value="รับใบลดหย่อน" selected>รับใบลดหย่อน</option>
+        <option value="ไม่รับใบลดหย่อน">ไม่รับใบลดหย่อน</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="slip_upload">รูปภาพแนบ (สลิปการโอนเงิน)</label>
+      <input type="file" id="slip_upload" name="slip_upload" accept="image/*" required>
+    </div>
+    <button type="submit">ส่งข้อมูล</button>
+  </form>
+  <div id="status" class="status-success"></div>
+</div>
+
+<script>
+  document.getElementById('donationForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const form = event.target;
+    const statusDiv = document.getElementById('status');
+    statusDiv.textContent = 'กำลังอัปโหลดรูปภาพและส่งข้อมูล...';
+    statusDiv.className = 'status-success';
+    const fileInput = form.slip_upload;
+    if (fileInput.files.length === 0) {
+      statusDiv.textContent = 'กรุณาแนบรูปภาพสลิป';
+      statusDiv.className = 'status-error';
+      return;
+    }
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const base64String = e.target.result.split(',')[1];
+      const formData = {
+        donation_purpose: form.donation_purpose.value,
+        name: form.name.value,
+        amount: form.amount.value,
+        channel: form.channel.value,
+        note: form.note.value,
+        receipt_option: form.receipt_option.value,
+        fileName: file.name,
+        fileType: file.type,
+        fileBlob: base64String
+      };
+      google.script.run
+        .withSuccessHandler(function(response) {
+          if (response.success) {
+            statusDiv.textContent = 'ขอบคุณสำหรับการบริจาคค่ะ ข้อมูลถูกบันทึกเรียบร้อยแล้ว!';
+            statusDiv.className = 'status-success';
+            form.reset();
+          } else {
+            statusDiv.textContent = 'เกิดข้อผิดพลาดในการบันทึกข้อมูล: ' + response.error;
+            statusDiv.className = 'status-error';
+          }
+        })
+        .withFailureHandler(function(error) {
+          statusDiv.textContent = 'เกิดข้อผิดพลาด: ' + error.message;
+          statusDiv.className = 'status-error';
+        })
+        .processForm(formData);
+    };
+    reader.readAsDataURL(file);
+  });
+</script>
+
+</body>
+</html>
